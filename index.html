@@ -1327,6 +1327,134 @@
     .hours-list li { font-size: 0.9rem; padding: 0.55rem 0; }
   }
 
+  /* ---------- Doodle annotations ---------- */
+  .doodle-note {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0.4rem 0 1.6rem;
+    color: var(--rose-2);
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    transform: rotate(-2.5deg) translateX(0.5rem);
+    line-height: 1.2;
+  }
+  .doodle-note .doodle-arrow {
+    width: 64px;
+    height: 50px;
+    flex-shrink: 0;
+    color: var(--rose);
+  }
+  .doodle-note .doodle-text em {
+    color: var(--maroon);
+    font-weight: 500;
+    font-style: italic;
+  }
+  @media (max-width: 800px) {
+    .doodle-note { font-size: 0.95rem; transform: rotate(-2deg); }
+    .doodle-note .doodle-arrow { width: 52px; height: 40px; }
+  }
+
+  /* ---------- FAQ ---------- */
+  .faq {
+    background: linear-gradient(180deg, var(--paper) 0%, var(--paper-2) 100%);
+    position: relative;
+  }
+  .faq h2 {
+    font-size: clamp(2.4rem, 4.8vw, 3.8rem);
+    margin-bottom: 3rem;
+    max-width: 22ch;
+  }
+  .faq h2 em {
+    font-style: italic;
+    color: var(--rose);
+    font-weight: 300;
+  }
+  .faq-list {
+    max-width: 820px;
+  }
+  .faq-list details {
+    border-top: 1px dotted rgba(28, 29, 24, 0.22);
+    padding: 1.5rem 0;
+  }
+  .faq-list details:last-child {
+    border-bottom: 1px dotted rgba(28, 29, 24, 0.22);
+  }
+  .faq-list summary {
+    list-style: none;
+    cursor: pointer;
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: clamp(1.2rem, 2.2vw, 1.65rem);
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    transition: color 0.25s ease;
+  }
+  .faq-list summary::-webkit-details-marker { display: none; }
+  .faq-list summary::after {
+    content: '';
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    border-radius: 999px;
+    background: var(--rose-soft);
+    border: 1px solid rgba(184, 122, 130, 0.4);
+    background-image:
+      linear-gradient(currentColor, currentColor),
+      linear-gradient(currentColor, currentColor);
+    background-size: 10px 1.5px, 1.5px 10px;
+    background-position: center, center;
+    background-repeat: no-repeat;
+    color: var(--maroon);
+    transition: transform 0.4s cubic-bezier(0.65, 0, 0.35, 1), background-size 0.3s ease;
+  }
+  .faq-list details[open] summary::after {
+    background-size: 10px 1.5px, 1.5px 0px;
+    transform: rotate(180deg);
+  }
+  .faq-list summary:hover { color: var(--rose); }
+  .faq-list details p {
+    font-size: 1.04rem;
+    line-height: 1.7;
+    color: var(--ink-2);
+    max-width: 60ch;
+    margin-top: 1rem;
+    font-family: 'Inter Tight', sans-serif;
+  }
+  .faq-list details p em {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    color: var(--maroon);
+    font-weight: 500;
+  }
+  .faq-foot {
+    margin-top: 2.5rem;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--ink-3);
+    max-width: 60ch;
+  }
+  .faq-foot a {
+    color: var(--rose-2);
+    border-bottom: 1px solid var(--rose-soft);
+    padding-bottom: 1px;
+    transition: color 0.25s ease, border-color 0.25s ease;
+  }
+  .faq-foot a:hover { color: var(--maroon); border-color: var(--maroon); }
+
+  @media (max-width: 800px) {
+    .faq h2 { font-size: clamp(2.4rem, 9.5vw, 3rem); line-height: 1.05; margin-bottom: 2rem; }
+    .faq-list summary { font-size: 1.15rem; }
+    .faq-list details { padding: 1.25rem 0; }
+    .faq-list details p { font-size: 0.96rem; }
+  }
+
   /* ---------- Story ---------- */
   .story {
     padding: 8rem 2.5rem;
@@ -1618,6 +1746,14 @@
       <div class="about-body">
         <h2 class="display reveal delay-1">A stylist's eye, <span class="underline">a magpie's heart</span>.</h2>
 
+        <a href="#magpie" class="doodle-note reveal delay-2" aria-label="Jump to the Curious Magpie section">
+          <svg class="doodle-arrow" viewBox="0 0 100 80" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M6 10 C 22 6, 38 18, 42 36 C 46 54, 60 64, 82 70" />
+            <path d="M70 60 L 82 70 L 70 76" />
+          </svg>
+          <span class="doodle-text">p.s. her shop is <em>just down here</em></span>
+        </a>
+
         <p class="lead reveal delay-1">Beetle Eyes is a little shop in Mountsorrel that started, as most good things do, with <em>too many beautiful things to keep at home</em>.</p>
 
         <p class="reveal delay-2">Corrine has spent years working as a stylist — pulling pieces, building wardrobes, knowing what works on whom. The shop is where that eye comes to live: rails of pre-loved womenswear and proper vintage, picked one piece at a time, kept honest on price, and re-styled into something you'd actually want to wear.</p>
@@ -1749,6 +1885,45 @@
   </div>
 </section>
 
+<section class="faq" id="faq">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="num">05 / Questions</span>
+    </div>
+
+    <h2 class="display reveal"><span class="underline">Obvious</span> questions, <em>answered</em>.</h2>
+
+    <div class="faq-list reveal delay-1">
+      <details>
+        <summary>Do you take pieces in?</summary>
+        <p>Sometimes — I'm fussy on purpose. DM <em>@beetleeyesclothing</em> with a few photos and I'll let you know if it's the right fit for the rail. Nothing makes the cut that I wouldn't put on a stylist's client.</p>
+      </details>
+
+      <details>
+        <summary>Do you do refunds?</summary>
+        <p>Exchange or store credit within 7 days, with the tag still on. Sale and clearance pieces are final, sorry. Bring the receipt where you can.</p>
+      </details>
+
+      <details>
+        <summary>Can I reserve something I saw on Instagram?</summary>
+        <p>Yes — drop a DM to <em>@beetleeyesclothing</em> and I'll hold it for 24 hours. Anything longer needs a small deposit so it's fair on the next person eyeing it up.</p>
+      </details>
+
+      <details>
+        <summary>Is there parking?</summary>
+        <p>Free parking on Market Place itself, and a small council car park 30 seconds away. Saturdays get busy — come early if you can, and you'll have the rails to yourself.</p>
+      </details>
+
+      <details>
+        <summary>Are you dog-friendly?</summary>
+        <p>Always. Well-behaved dogs are very welcome — there's water by the door and Curious Magpie keeps biscuits behind the counter.</p>
+      </details>
+    </div>
+
+    <p class="faq-foot reveal delay-2">Still wondering something? <a href="https://www.instagram.com/beetleeyesclothing/" target="_blank" rel="noopener">DM us on Instagram →</a></p>
+  </div>
+</section>
+
 <section class="story" id="story">
   <span class="story-decor display" aria-hidden="true">"</span>
   <blockquote>
@@ -1760,7 +1935,7 @@
 <section class="visit" id="visit">
   <div class="container">
     <div class="section-head reveal">
-      <span class="num">05 / Where</span>
+      <span class="num">06 / Where</span>
     </div>
 
     <div class="visit-grid">
