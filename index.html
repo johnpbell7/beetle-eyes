@@ -1552,8 +1552,10 @@
     line-height: 1.7;
     color: var(--ink-2);
     max-width: 60ch;
-    margin-top: 1rem;
+    padding-top: 1rem;
     font-family: 'Inter Tight', sans-serif;
+    overflow: hidden;
+    transition: height 0.32s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.25s ease;
   }
   .faq-list details p em {
     font-family: 'Fraunces', serif;
@@ -2199,6 +2201,40 @@
   })();
 
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Smooth FAQ accordion — hijack the toggle, animate height
+  document.querySelectorAll('.faq-list details').forEach((details) => {
+    const summary = details.querySelector('summary');
+    const content = details.querySelector('p');
+    if (!summary || !content) return;
+
+    const animate = (from, to, opening) => {
+      content.style.height = from + 'px';
+      content.style.opacity = opening ? '0' : '1';
+      // force a reflow so the starting state is committed
+      void content.offsetHeight;
+      content.style.height = to + 'px';
+      content.style.opacity = opening ? '1' : '0';
+      const cleanup = (e) => {
+        if (e.propertyName !== 'height') return;
+        content.removeEventListener('transitionend', cleanup);
+        if (!opening) details.open = false;
+        content.style.height = '';
+        content.style.opacity = '';
+      };
+      content.addEventListener('transitionend', cleanup);
+    };
+
+    summary.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (details.open) {
+        animate(content.scrollHeight, 0, false);
+      } else {
+        details.open = true;
+        animate(0, content.scrollHeight, true);
+      }
+    });
+  });
 
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => {
