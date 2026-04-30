@@ -838,6 +838,15 @@
     font-style: italic;
     font-size: 0.95rem;
     color: var(--rose);
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(-22px) rotate(-3deg);
+    transition: opacity 0.5s ease 0.2s,
+                transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s;
+  }
+  .section-head.in .num {
+    opacity: 1;
+    transform: translateY(0) rotate(0);
   }
 
   /* ---------- About ---------- */
@@ -1632,21 +1641,43 @@
 
   @media (max-width: 800px) {
     .story { padding: 5rem 1.5rem; }
-    .story-decor { font-size: 16rem; left: -1rem; }
+    .story-decor { width: 14rem; height: 14rem; left: -1rem; top: -1rem; }
     .story blockquote p { font-size: clamp(2rem, 7vw, 2.6rem); line-height: 1.22; }
   }
 
   .story-decor {
     position: absolute;
-    font-family: 'Fraunces', serif;
-    color: var(--beetle);
-    opacity: 0.06;
-    font-size: 24rem;
-    line-height: 0.8;
+    width: 22rem;
+    height: 22rem;
     top: -2rem;
     left: 1rem;
+    color: var(--beetle);
+    opacity: 0.18;
     pointer-events: none;
     user-select: none;
+    display: block;
+  }
+  .story-decor svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    overflow: visible;
+  }
+  .story-decor svg path {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 280;
+    stroke-dashoffset: 280;
+    transition: stroke-dashoffset 1.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .story-decor svg path:nth-of-type(2) {
+    transition-delay: 0.3s;
+  }
+  .story-decor.drawn svg path {
+    stroke-dashoffset: 0;
   }
 
   .story blockquote {
@@ -2134,7 +2165,12 @@
 </section>
 
 <section class="story" id="story">
-  <span class="story-decor display" aria-hidden="true">"</span>
+  <span class="story-decor" aria-hidden="true">
+    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <path d="M28 152 Q 14 100 32 68 Q 52 38 78 32" />
+      <path d="M112 152 Q 98 100 116 68 Q 136 38 162 32" />
+    </svg>
+  </span>
   <blockquote>
     <p class="display reveal">Buy <em>less</em>, choose well, and rummage often. Every piece in here belonged to someone before you — and looked good on them too.</p>
     <cite class="reveal delay-1">— the Beetle Eyes way</cite>
@@ -2319,6 +2355,20 @@
   }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
 
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Story decoration — draw the quote-mark strokes when section enters view
+  const storyDecor = document.querySelector('.story-decor');
+  if (storyDecor) {
+    const drawIO = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('drawn');
+          drawIO.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.25 });
+    drawIO.observe(storyDecor);
+  }
 
   // Burger menu
   const burger = document.getElementById('burgerBtn');
