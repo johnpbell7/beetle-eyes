@@ -80,6 +80,106 @@
     font-variation-settings: "opsz" 144;
   }
 
+  /* ---------- Page-load curtains (sketched doodle) ---------- */
+  .page-curtain {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    pointer-events: auto;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  body:has(.page-curtain) {
+    overflow: hidden;
+  }
+  .page-curtain .curtain {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 52%;
+    background: var(--paper);
+    will-change: transform;
+  }
+  .page-curtain .curtain-left {
+    left: 0;
+    animation: curtain-open-left 1.05s cubic-bezier(0.76, 0, 0.24, 1) 1.2s forwards;
+  }
+  .page-curtain .curtain-right {
+    right: 0;
+    animation: curtain-open-right 1.05s cubic-bezier(0.76, 0, 0.24, 1) 1.2s forwards;
+  }
+  .page-curtain .curtain-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    color: var(--rose-2);
+    opacity: 0.55;
+  }
+  .page-curtain .curtain-right .curtain-svg {
+    transform: scaleX(-1);
+  }
+  .page-curtain .curtain-center {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    text-align: center;
+    pointer-events: none;
+    animation: curtain-center-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both,
+               curtain-center-out 0.4s ease 1.15s forwards;
+  }
+  .page-curtain .curtain-center img {
+    width: 240px;
+    max-width: 60vw;
+    height: auto;
+    display: block;
+    margin: 0 auto 0.9rem;
+  }
+  .page-curtain .curtain-center p {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 1.05rem;
+    letter-spacing: 0.04em;
+    color: var(--maroon);
+    margin: 0;
+  }
+  .page-curtain .curtain-center p .dot {
+    color: var(--rose);
+    margin: 0 0.4em;
+  }
+  .page-curtain.done {
+    display: none;
+  }
+
+  @keyframes curtain-open-left {
+    from { transform: translateX(0); }
+    to { transform: translateX(-110%); }
+  }
+  @keyframes curtain-open-right {
+    from { transform: translateX(0); }
+    to { transform: translateX(110%); }
+  }
+  @keyframes curtain-center-in {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes curtain-center-out {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(-10px); }
+  }
+
+  @media (max-width: 600px) {
+    .page-curtain .curtain-center img { width: 180px; }
+    .page-curtain .curtain-center p { font-size: 0.92rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .page-curtain { display: none; }
+  }
+
   .label {
     font-family: 'Inter Tight', sans-serif;
     font-size: 0.72rem;
@@ -1670,6 +1770,49 @@
 </head>
 <body>
 
+<div class="page-curtain" id="pageCurtain" aria-hidden="true">
+  <div class="curtain curtain-left">
+    <svg class="curtain-svg" viewBox="0 0 200 800" preserveAspectRatio="xMaxYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <line x1="0" y1="10" x2="200" y2="10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      <circle cx="22" cy="14" r="4.5" fill="none" stroke="currentColor" stroke-width="1.3"/>
+      <circle cx="55" cy="14" r="4.5" fill="none" stroke="currentColor" stroke-width="1.3"/>
+      <circle cx="88" cy="14" r="4.5" fill="none" stroke="currentColor" stroke-width="1.3"/>
+      <circle cx="121" cy="14" r="4.5" fill="none" stroke="currentColor" stroke-width="1.3"/>
+      <circle cx="154" cy="14" r="4.5" fill="none" stroke="currentColor" stroke-width="1.3"/>
+      <circle cx="187" cy="14" r="4.5" fill="none" stroke="currentColor" stroke-width="1.3"/>
+      <path d="M22 22 Q 24 140 19 270 Q 23 400 21 540 Q 18 680 23 798" stroke="currentColor" stroke-width="0.9" fill="none" stroke-linecap="round"/>
+      <path d="M55 22 Q 53 140 57 270 Q 53 400 57 540 Q 55 680 52 798" stroke="currentColor" stroke-width="0.9" fill="none" stroke-linecap="round"/>
+      <path d="M88 22 Q 90 140 86 270 Q 90 400 87 540 Q 90 680 86 798" stroke="currentColor" stroke-width="0.9" fill="none" stroke-linecap="round"/>
+      <path d="M121 22 Q 119 140 123 270 Q 119 400 123 540 Q 121 680 119 798" stroke="currentColor" stroke-width="0.9" fill="none" stroke-linecap="round"/>
+      <path d="M154 22 Q 156 140 152 270 Q 156 400 153 540 Q 156 680 152 798" stroke="currentColor" stroke-width="0.9" fill="none" stroke-linecap="round"/>
+      <path d="M187 22 Q 185 140 189 270 Q 185 400 189 540 Q 187 680 185 798" stroke="currentColor" stroke-width="0.9" fill="none" stroke-linecap="round"/>
+      <path d="M0 795 Q 12 805 25 795 T 50 795 T 75 795 T 100 795 T 125 795 T 150 795 T 175 795 T 200 795" stroke="currentColor" stroke-width="1.1" fill="none" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <div class="curtain curtain-right">
+    <svg class="curtain-svg" viewBox="0 0 200 800" preserveAspectRatio="xMaxYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <line x1="0" y1="10" x2="200" y2="10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      <circle cx="22" cy="14" r="4.5" fill="none" stroke="currentColor" stroke-width="1.3"/>
+      <circle cx="55" cy="14" r="4.5" fill="none" stroke="currentColor" stroke-width="1.3"/>
+      <circle cx="88" cy="14" r="4.5" fill="none" stroke="currentColor" stroke-width="1.3"/>
+      <circle cx="121" cy="14" r="4.5" fill="none" stroke="currentColor" stroke-width="1.3"/>
+      <circle cx="154" cy="14" r="4.5" fill="none" stroke="currentColor" stroke-width="1.3"/>
+      <circle cx="187" cy="14" r="4.5" fill="none" stroke="currentColor" stroke-width="1.3"/>
+      <path d="M22 22 Q 24 140 19 270 Q 23 400 21 540 Q 18 680 23 798" stroke="currentColor" stroke-width="0.9" fill="none" stroke-linecap="round"/>
+      <path d="M55 22 Q 53 140 57 270 Q 53 400 57 540 Q 55 680 52 798" stroke="currentColor" stroke-width="0.9" fill="none" stroke-linecap="round"/>
+      <path d="M88 22 Q 90 140 86 270 Q 90 400 87 540 Q 90 680 86 798" stroke="currentColor" stroke-width="0.9" fill="none" stroke-linecap="round"/>
+      <path d="M121 22 Q 119 140 123 270 Q 119 400 123 540 Q 121 680 119 798" stroke="currentColor" stroke-width="0.9" fill="none" stroke-linecap="round"/>
+      <path d="M154 22 Q 156 140 152 270 Q 156 400 153 540 Q 156 680 152 798" stroke="currentColor" stroke-width="0.9" fill="none" stroke-linecap="round"/>
+      <path d="M187 22 Q 185 140 189 270 Q 185 400 189 540 Q 187 680 185 798" stroke="currentColor" stroke-width="0.9" fill="none" stroke-linecap="round"/>
+      <path d="M0 795 Q 12 805 25 795 T 50 795 T 75 795 T 100 795 T 125 795 T 150 795 T 175 795 T 200 795" stroke="currentColor" stroke-width="1.1" fill="none" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <div class="curtain-center">
+    <img src="img/logo-maroon.png" alt="Beetle Eyes Clothing" />
+    <p>Pre-loved &amp; Vintage <span class="dot">·</span> Mountsorrel</p>
+  </div>
+</div>
+
 <nav class="top" id="topNav">
   <a href="#" class="logo-mark" aria-label="Beetle Eyes Clothing — home">
     <img src="img/logo.png" alt="Beetle Eyes Clothing" />
@@ -2013,6 +2156,25 @@
 </footer>
 
 <script>
+  // Page-load curtain — remove from DOM once the open animation finishes
+  (function () {
+    const curtain = document.getElementById('pageCurtain');
+    if (!curtain) return;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion) { curtain.remove(); return; }
+    const removeCurtain = () => { if (curtain.parentNode) curtain.remove(); };
+    const left = curtain.querySelector('.curtain-left');
+    if (left) {
+      left.addEventListener('animationend', (e) => {
+        if (e.animationName === 'curtain-open-left') removeCurtain();
+      });
+    }
+    // Failsafe: nuke after 4s no matter what
+    setTimeout(removeCurtain, 4000);
+    // Click to skip
+    curtain.addEventListener('click', removeCurtain);
+  })();
+
   document.getElementById('year').textContent = new Date().getFullYear();
 
   const io = new IntersectionObserver((entries) => {
