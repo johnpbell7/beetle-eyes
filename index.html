@@ -626,6 +626,23 @@
     opacity: 0.85;
     z-index: -1;
     transform: skewX(-6deg);
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 0.7s cubic-bezier(0.65, 0, 0.35, 1) 0.35s;
+  }
+
+  /* Reveal-driven titles: draw underline when their h2 enters view */
+  .reveal.in .underline::after {
+    clip-path: inset(0 0 0 0);
+  }
+
+  /* Hero h1 isn't a reveal element — animate its underline against the heroIn timing */
+  .hero-text h1 .underline::after {
+    animation: underline-draw 0.75s cubic-bezier(0.65, 0, 0.35, 1) 1s forwards;
+  }
+
+  @keyframes underline-draw {
+    from { clip-path: inset(0 100% 0 0); }
+    to   { clip-path: inset(0 0 0 0); }
   }
 
   .hero-sub {
