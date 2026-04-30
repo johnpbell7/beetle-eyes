@@ -977,6 +977,52 @@
     transform: translateY(0);
   }
 
+  /* Sticky tape — corners on hover, like the photos are pinned to a corkboard */
+  .gallery-grid figure::before,
+  .gallery-grid figure::after {
+    content: '';
+    position: absolute;
+    top: -8px;
+    width: 78px;
+    height: 22px;
+    background:
+      repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.10) 0 2px, transparent 2px 5px),
+      linear-gradient(90deg, rgba(224, 196, 199, 0.32) 0%, rgba(224, 196, 199, 0.82) 14%, rgba(224, 196, 199, 0.82) 86%, rgba(224, 196, 199, 0.32) 100%);
+    box-shadow: 0 3px 6px rgba(28, 29, 24, 0.18);
+    opacity: 0;
+    z-index: 4;
+    pointer-events: none;
+    transition: opacity 0.45s ease, transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .gallery-grid figure::before {
+    left: -14px;
+    transform: rotate(-22deg) translateY(-4px);
+  }
+  .gallery-grid figure::after {
+    right: -14px;
+    transform: rotate(22deg) translateY(-4px);
+  }
+  .gallery-grid figure:hover::before {
+    opacity: 1;
+    transform: rotate(-22deg) translateY(0);
+  }
+  .gallery-grid figure:hover::after {
+    opacity: 1;
+    transform: rotate(22deg) translateY(0);
+  }
+
+  /* Touch devices: tape always visible (no hover state) */
+  @media (hover: none) {
+    .gallery-grid figure::before {
+      opacity: 0.95;
+      transform: rotate(-22deg) translateY(0);
+    }
+    .gallery-grid figure::after {
+      opacity: 0.95;
+      transform: rotate(22deg) translateY(0);
+    }
+  }
+
   /* Asymmetric layout */
   .gallery-grid figure:nth-child(1) { grid-column: span 7; grid-row: span 4; }
   .gallery-grid figure:nth-child(2) { grid-column: span 5; grid-row: span 3; }
