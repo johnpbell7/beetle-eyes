@@ -763,6 +763,8 @@
     position: relative;
     height: 75vh;
     min-height: 500px;
+    perspective: 1400px;
+    perspective-origin: center;
   }
 
   .frame {
@@ -939,6 +941,17 @@
     content: '✦';
     color: var(--rose);
     font-style: normal;
+    display: inline-block;
+    animation: twinkle 1.8s ease-in-out infinite;
+  }
+  .marquee-track span:nth-child(2n)::after { animation-delay: 0.4s; }
+  .marquee-track span:nth-child(3n)::after { animation-delay: 0.8s; }
+  .marquee-track span:nth-child(5n)::after { animation-delay: 1.2s; }
+  .marquee-track span:nth-child(7n)::after { animation-delay: 0.6s; }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.55; transform: scale(1); }
+    50%      { opacity: 1;    transform: scale(1.18); }
   }
 
   @keyframes scroll {
@@ -1668,6 +1681,32 @@
     animation: bounce 2s ease-in-out infinite;
   }
 
+  .map-sonar {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 22px;
+    height: 22px;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 4;
+  }
+  .map-sonar::before,
+  .map-sonar::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 2px solid var(--rose);
+    border-radius: 50%;
+    opacity: 0;
+    animation: pin-sonar 2.6s ease-out infinite;
+  }
+  .map-sonar::after { animation-delay: 1.3s; }
+
+  @keyframes pin-sonar {
+    0%   { transform: scale(0.3); opacity: 0.7; }
+    100% { transform: scale(4.2); opacity: 0; }
+  }
+
   @keyframes bounce {
     0%, 100% { transform: translate(-50%, -100%); }
     50% { transform: translate(-50%, -110%); }
@@ -2367,6 +2406,7 @@
       </div>
 
       <div class="map-frame reveal delay-1">
+        <span class="map-sonar" aria-hidden="true"></span>
         <span class="map-pin" aria-hidden="true">
           <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
         </span>
@@ -2604,7 +2644,9 @@
       frames.forEach((f, i) => {
         const depth = (i + 1) * 6;
         const baseRot = f.classList.contains('f1') ? -3 : f.classList.contains('f2') ? 4 : -6;
-        f.style.transform = `translate(${x * depth}px, ${y * depth}px) rotate(${baseRot}deg)`;
+        const tiltX = -y * 8; // tilt up/down based on cursor Y
+        const tiltY = x * 8;  // tilt left/right based on cursor X
+        f.style.transform = `translate(${x * depth}px, ${y * depth}px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) rotate(${baseRot}deg)`;
       });
     });
     heroVisual.addEventListener('mouseleave', () => {
