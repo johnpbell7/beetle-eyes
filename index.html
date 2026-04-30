@@ -275,9 +275,13 @@
     background: var(--rose);
     padding: 0.7rem 1.2rem;
     border-radius: 999px;
-    transition: transform 0.25s ease, background 0.25s ease;
+    transform: translate(var(--mx, 0px), var(--my, 0px));
+    transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), background 0.25s ease;
   }
-  nav.top .visit-btn:hover { background: var(--rose-2); transform: translateY(-1px); }
+  nav.top .visit-btn:hover {
+    background: var(--rose-2);
+    transform: translate(var(--mx, 0px), calc(var(--my, 0px) - 1px));
+  }
 
   /* Burger button - hidden on desktop */
   .burger {
@@ -1522,7 +1526,8 @@
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
-    transition: color 0.25s ease;
+    transform: translate(var(--mx, 0px), var(--my, 0px));
+    transition: color 0.25s ease, transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
   }
   .faq-list summary::-webkit-details-marker { display: none; }
   .faq-list summary::after {
@@ -2201,6 +2206,47 @@
   })();
 
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Magnetic buttons — Find us pill + FAQ summaries drift toward cursor as it nears
+  (function () {
+    const els = document.querySelectorAll('.visit-btn, .faq-list summary');
+    if (!els.length) return;
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const RADIUS = 90;
+    const MAX_PULL = 10;
+    const STRENGTH = 0.32;
+    let raf = null, mx = 0, my = 0;
+
+    const update = () => {
+      raf = null;
+      els.forEach((el) => {
+        const r = el.getBoundingClientRect();
+        if (r.width === 0) return; // hidden (mobile nav)
+        const dx = Math.max(r.left - mx, 0, mx - r.right);
+        const dy = Math.max(r.top - my, 0, my - r.bottom);
+        const dist = Math.hypot(dx, dy);
+        if (dist < RADIUS) {
+          const cx = r.left + r.width / 2;
+          const cy = r.top + r.height / 2;
+          const factor = 1 - dist / RADIUS;
+          const pullX = Math.max(-MAX_PULL, Math.min(MAX_PULL, (mx - cx) * STRENGTH));
+          const pullY = Math.max(-MAX_PULL, Math.min(MAX_PULL, (my - cy) * STRENGTH));
+          el.style.setProperty('--mx', (pullX * factor).toFixed(2) + 'px');
+          el.style.setProperty('--my', (pullY * factor).toFixed(2) + 'px');
+        } else if (el.style.getPropertyValue('--mx') !== '0px') {
+          el.style.setProperty('--mx', '0px');
+          el.style.setProperty('--my', '0px');
+        }
+      });
+    };
+
+    document.addEventListener('mousemove', (e) => {
+      mx = e.clientX; my = e.clientY;
+      if (raf === null) raf = requestAnimationFrame(update);
+    }, { passive: true });
+  })();
 
   // Smooth FAQ accordion — hijack the toggle, animate height
   document.querySelectorAll('.faq-list details').forEach((details) => {
