@@ -2180,7 +2180,11 @@
     const curtain = document.getElementById('pageCurtain');
     if (!curtain) return;
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduceMotion) { curtain.remove(); return; }
+    // Only show curtain once per browser session
+    let alreadySeen = false;
+    try { alreadySeen = sessionStorage.getItem('curtain-seen') === '1'; } catch (e) {}
+    if (alreadySeen || reduceMotion) { curtain.remove(); return; }
+    try { sessionStorage.setItem('curtain-seen', '1'); } catch (e) {}
     const removeCurtain = () => { if (curtain.parentNode) curtain.remove(); };
     const left = curtain.querySelector('.curtain-left');
     if (left) {
