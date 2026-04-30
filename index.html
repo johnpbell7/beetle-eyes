@@ -1760,6 +1760,17 @@
     gap: 1rem;
     transform: translate(var(--mx, 0px), var(--my, 0px));
     transition: color 0.25s ease, transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+  }
+  .faq-list summary:focus-visible {
+    outline: 2px solid var(--rose);
+    outline-offset: 6px;
+    border-radius: 2px;
+  }
+  .faq-list details {
+    -webkit-tap-highlight-color: transparent;
   }
   .faq-list summary::-webkit-details-marker { display: none; }
   .faq-list summary::after {
