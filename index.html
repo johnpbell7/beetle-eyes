@@ -34,6 +34,17 @@
     --shadow-card: 0 8px 30px -10px rgba(28, 29, 24, 0.18);
   }
 
+  @property --stamp-wobble {
+    syntax: '<angle>';
+    inherits: false;
+    initial-value: 0deg;
+  }
+  @keyframes stamp-wobble {
+    0%, 100% { --stamp-wobble: 0deg; }
+    33%       { --stamp-wobble: 1.6deg; }
+    66%       { --stamp-wobble: -1.4deg; }
+  }
+
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
 
@@ -608,7 +619,7 @@
     background: var(--rose-soft);
     color: var(--maroon);
     padding: 1.1rem 1.4rem 1rem;
-    transform: rotate(6deg);
+    transform: rotate(calc(6deg + var(--stamp-wobble)));
     z-index: 5;
     box-shadow: var(--shadow-warm);
     border: 1px solid rgba(184, 122, 130, 0.35);
@@ -690,7 +701,7 @@
       left: auto;
       padding: 0.85rem 1rem 0.75rem;
       min-width: 120px;
-      transform: rotate(-4deg);
+      transform: rotate(calc(-4deg + var(--stamp-wobble)));
     }
     .address-stamp strong {
       font-size: 1.25rem;
@@ -1224,10 +1235,11 @@
     font-family: 'Fraunces', serif;
     font-style: italic;
     font-size: 0.95rem;
-    transform: rotate(-3deg);
+    transform: rotate(calc(-3deg + var(--stamp-wobble)));
     z-index: 4;
     box-shadow: var(--shadow-card);
     border: 1px solid rgba(184, 122, 130, 0.35);
+    animation: stamp-wobble 7.5s ease-in-out 1.5s infinite;
   }
   .magpie-tag strong {
     display: block;
@@ -1315,7 +1327,7 @@
       bottom: -3%;
       left: 38%;
       right: auto;
-      transform: rotate(-4deg);
+      transform: rotate(calc(-4deg + var(--stamp-wobble)));
     }
     .magpie-list { grid-template-columns: 1fr 1fr; gap: 0.5rem 1rem; }
     .magpie-list li { font-size: 0.92rem; }
@@ -1758,7 +1770,14 @@
   }
   .frame.f1 { animation-delay: 0.45s; }
   .frame.f2 { animation-delay: 0.6s; }
-  .address-stamp { animation-delay: 0.85s; }
+  .address-stamp {
+    animation: frameIn 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.85s forwards,
+               stamp-wobble 6.5s ease-in-out 2.2s infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .address-stamp, .magpie-tag { animation: none; }
+  }
 
   @keyframes heroIn {
     to { opacity: 1; transform: translateY(0); }
