@@ -401,12 +401,13 @@
     display: inline-block;
   }
 
-  h1 .underline {
+  .underline {
     position: relative;
     display: inline-block;
+    isolation: isolate;
   }
 
-  h1 .underline::after {
+  .underline::after {
     content: '';
     position: absolute;
     left: -2%; right: -2%; bottom: 4%;
@@ -550,7 +551,7 @@
     .hero-text { order: 1; }
 
     h1.hero-title {
-      font-size: clamp(2.6rem, 11vw, 4rem);
+      font-size: clamp(3rem, 12.5vw, 4.6rem);
       letter-spacing: -0.025em;
     }
 
@@ -607,8 +608,9 @@
       min-height: 380px;
     }
     h1.hero-title {
-      font-size: clamp(2.4rem, 12vw, 3.4rem);
+      font-size: clamp(2.8rem, 13.5vw, 3.8rem);
     }
+    .hero-sub { font-size: 1.1rem; }
   }
 
   /* ---------- Marquee ---------- */
@@ -791,9 +793,9 @@
   @media (max-width: 800px) {
     .about-grid { grid-template-columns: 1fr; gap: 2rem; }
     .about-portrait { max-width: 480px; margin: 0 auto; }
-    .about-body h2 { font-size: clamp(2rem, 8vw, 2.6rem); margin-bottom: 1.4rem; }
-    .about-body p.lead { font-size: 1.18rem; }
-    .about-body p { font-size: 1rem; }
+    .about-body h2 { font-size: clamp(2.4rem, 9.5vw, 3rem); margin-bottom: 1.4rem; }
+    .about-body p.lead { font-size: 1.25rem; }
+    .about-body p { font-size: 1.02rem; }
     .about-meta { grid-template-columns: 1fr; gap: 1rem; padding-top: 1.5rem; }
   }
 
@@ -906,11 +908,11 @@
     }
     .ware:nth-child(n) { grid-column: span 1; min-height: auto; padding: 1.4rem 1.2rem 1.6rem; }
     .ware:nth-child(1), .ware:nth-child(5) { grid-column: span 2; }
-    .ware h3 { font-size: 1.5rem; margin-bottom: 0.6rem; }
-    .ware p { font-size: 0.88rem; }
+    .ware h3 { font-size: clamp(1.75rem, 5.5vw, 2rem); margin-bottom: 0.7rem; line-height: 1.1; }
+    .ware p { font-size: 0.92rem; }
     .ware .num { font-size: 0.85rem; margin-bottom: 0.7rem; }
-    .wares h2 { font-size: clamp(2.2rem, 9vw, 3rem); }
-    .wares-intro { font-size: 1.08rem; margin-bottom: 3rem; }
+    .wares h2 { font-size: clamp(2.6rem, 10vw, 3.4rem); }
+    .wares-intro { font-size: 1.15rem; margin-bottom: 3rem; }
   }
 
   @media (max-width: 480px) {
@@ -1171,9 +1173,9 @@
     }
     .magpie-list { grid-template-columns: 1fr 1fr; gap: 0.5rem 1rem; }
     .magpie-list li { font-size: 0.92rem; }
-    .magpie-body h2 { font-size: clamp(1.9rem, 8vw, 2.6rem); }
-    .magpie-body .lead { font-size: 1.1rem; }
-    .magpie-body p { font-size: 0.96rem; }
+    .magpie-body h2 { font-size: clamp(2.4rem, 9.5vw, 3rem); }
+    .magpie-body .lead { font-size: 1.18rem; }
+    .magpie-body p { font-size: 1rem; }
   }
 
   @media (max-width: 480px) {
@@ -1295,7 +1297,7 @@
   @media (max-width: 900px) {
     .visit-grid { grid-template-columns: 1fr; gap: 2.5rem; }
     .map-frame { aspect-ratio: 4/3; }
-    .visit-content h2 { font-size: clamp(2rem, 8vw, 3rem); }
+    .visit-content h2 { font-size: clamp(2.4rem, 9.5vw, 3.2rem); }
     .address-card { padding: 1.5rem 1.6rem; }
     .address-card address { font-size: 1.4rem; }
     .hours-list li { font-size: 0.9rem; padding: 0.55rem 0; }
@@ -1312,6 +1314,7 @@
   @media (max-width: 800px) {
     .story { padding: 5rem 1.5rem; }
     .story-decor { font-size: 16rem; left: -1rem; }
+    .story blockquote p { font-size: clamp(2rem, 7vw, 2.6rem); line-height: 1.22; }
   }
 
   .story-decor {
@@ -1589,7 +1592,7 @@
       </div>
 
       <div class="about-body">
-        <h2 class="display reveal delay-1">A stylist's eye, a magpie's heart.</h2>
+        <h2 class="display reveal delay-1">A stylist's eye, <span class="underline">a magpie's heart</span>.</h2>
 
         <p class="lead reveal delay-1">Beetle Eyes is a little shop in Mountsorrel that started, as most good things do, with <em>too many beautiful things to keep at home</em>.</p>
 
@@ -1618,7 +1621,7 @@
       <span class="num" style="color: var(--rose);">02 / What's inside</span>
     </div>
 
-    <h2 class="display reveal">Rails worth <em>rummaging</em>.</h2>
+    <h2 class="display reveal"><span class="underline">Rails</span> worth <em>rummaging</em>.</h2>
     <p class="wares-intro reveal delay-1">Stock changes weekly. This is the gist of what tends to live on the rails — but the fun is in turning up and finding the thing you didn't know you wanted.</p>
 
     <div class="wares-grid">
@@ -1702,7 +1705,7 @@
         <span class="num">04 / The shop</span>
       </div>
 
-      <h2 class="display reveal">Beetle Eyes lives inside <em>Curious Magpie</em>.</h2>
+      <h2 class="display reveal"><span class="underline">Beetle Eyes</span> lives inside <em>Curious Magpie</em>.</h2>
 
       <p class="lead reveal delay-1">A wider, stranger, lovelier shop full of one-off finds — and Corrine's rails sit happily at the heart of it.</p>
 
