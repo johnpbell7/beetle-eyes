@@ -335,8 +335,24 @@
     background: var(--rose);
     padding: 0.7rem 1.2rem;
     border-radius: 999px;
+    position: relative;
+    overflow: hidden;
     transform: translate(var(--mx, 0px), var(--my, 0px));
     transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), background 0.25s ease;
+  }
+  nav.top .visit-btn .ripple {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 999px;
+    background: rgba(244, 237, 224, 0.55);
+    transform: translate(-50%, -50%) scale(0);
+    pointer-events: none;
+    animation: visit-btn-ripple 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+  @keyframes visit-btn-ripple {
+    0%   { transform: translate(-50%, -50%) scale(0); opacity: 0.65; }
+    100% { transform: translate(-50%, -50%) scale(45); opacity: 0; }
   }
   nav.top .visit-btn:hover {
     background: var(--rose-2);
@@ -365,15 +381,34 @@
     transform-origin: center;
   }
   .burger.open span:nth-child(1) {
-    transform: translateY(7px) rotate(45deg);
     background: var(--paper);
+    animation: burger-1-open 0.45s cubic-bezier(0.65, 0, 0.35, 1) forwards;
   }
   .burger.open span:nth-child(2) {
-    opacity: 0;
+    background: var(--paper);
+    animation: burger-2-open 0.45s ease forwards;
   }
   .burger.open span:nth-child(3) {
-    transform: translateY(-7px) rotate(-45deg);
     background: var(--paper);
+    animation: burger-3-open 0.45s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+  }
+  @keyframes burger-1-open {
+    0%   { transform: translateY(0) rotate(0) scaleX(1); }
+    40%  { transform: translateY(7px) rotate(0) scaleX(0.18); }
+    55%  { transform: translateY(7px) rotate(0) scaleX(0.18); }
+    100% { transform: translateY(7px) rotate(45deg) scaleX(1); }
+  }
+  @keyframes burger-2-open {
+    0%   { opacity: 1; transform: scaleX(1); }
+    40%  { opacity: 1; transform: scaleX(0.18); }
+    60%  { opacity: 0; transform: scaleX(0.18); }
+    100% { opacity: 0; transform: scaleX(0.18); }
+  }
+  @keyframes burger-3-open {
+    0%   { transform: translateY(0) rotate(0) scaleX(1); }
+    40%  { transform: translateY(-7px) rotate(0) scaleX(0.18); }
+    55%  { transform: translateY(-7px) rotate(0) scaleX(0.18); }
+    100% { transform: translateY(-7px) rotate(-45deg) scaleX(1); }
   }
 
   /* Mobile menu overlay */
@@ -2301,6 +2336,21 @@
   })();
 
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Click ripple on the Find us pill
+  (function () {
+    const btn = document.querySelector('.visit-btn');
+    if (!btn) return;
+    btn.addEventListener('click', (e) => {
+      const ripple = document.createElement('span');
+      ripple.className = 'ripple';
+      const rect = btn.getBoundingClientRect();
+      ripple.style.left = (e.clientX - rect.left) + 'px';
+      ripple.style.top = (e.clientY - rect.top) + 'px';
+      btn.appendChild(ripple);
+      ripple.addEventListener('animationend', () => ripple.remove());
+    });
+  })();
 
   // Magnetic buttons — Find us pill + FAQ summaries drift toward cursor as it nears
   (function () {
