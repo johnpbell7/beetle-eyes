@@ -793,7 +793,7 @@
   @media (max-width: 800px) {
     .about-grid { grid-template-columns: 1fr; gap: 2rem; }
     .about-portrait { max-width: 480px; margin: 0 auto; }
-    .about-body h2 { font-size: clamp(2.4rem, 9.5vw, 3rem); margin-bottom: 1.4rem; }
+    .about-body h2 { font-size: clamp(2.7rem, 10.5vw, 3.4rem); line-height: 1.05; margin-bottom: 1.4rem; }
     .about-body p.lead { font-size: 1.25rem; }
     .about-body p { font-size: 1.02rem; }
     .about-meta { grid-template-columns: 1fr; gap: 1rem; padding-top: 1.5rem; }
@@ -911,7 +911,7 @@
     .ware h3 { font-size: clamp(1.75rem, 5.5vw, 2rem); margin-bottom: 0.7rem; line-height: 1.1; }
     .ware p { font-size: 0.92rem; }
     .ware .num { font-size: 0.85rem; margin-bottom: 0.7rem; }
-    .wares h2 { font-size: clamp(2.6rem, 10vw, 3.4rem); }
+    .wares h2 { font-size: clamp(2.9rem, 11vw, 3.8rem); line-height: 1.05; }
     .wares-intro { font-size: 1.15rem; margin-bottom: 3rem; }
   }
 
@@ -1173,7 +1173,7 @@
     }
     .magpie-list { grid-template-columns: 1fr 1fr; gap: 0.5rem 1rem; }
     .magpie-list li { font-size: 0.92rem; }
-    .magpie-body h2 { font-size: clamp(2.4rem, 9.5vw, 3rem); }
+    .magpie-body h2 { font-size: clamp(2.7rem, 10.5vw, 3.4rem); line-height: 1.05; }
     .magpie-body .lead { font-size: 1.18rem; }
     .magpie-body p { font-size: 1rem; }
   }
@@ -1268,6 +1268,30 @@
   .map-frame iframe {
     width: 100%; height: 100%; border: 0;
     filter: grayscale(0.4) sepia(0.15) saturate(0.85);
+    pointer-events: none;
+  }
+
+  .map-frame .map-link {
+    position: absolute;
+    bottom: 0.9rem;
+    right: 0.9rem;
+    z-index: 6;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: 0.55rem 0.9rem;
+    border-radius: 999px;
+    box-shadow: var(--shadow-card);
+    transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+  }
+  .map-frame .map-link:hover {
+    background: var(--rose);
+    color: var(--paper);
+    transform: translateY(-1px);
   }
 
   .map-frame::after {
@@ -1297,7 +1321,7 @@
   @media (max-width: 900px) {
     .visit-grid { grid-template-columns: 1fr; gap: 2.5rem; }
     .map-frame { aspect-ratio: 4/3; }
-    .visit-content h2 { font-size: clamp(2.4rem, 9.5vw, 3.2rem); }
+    .visit-content h2 { font-size: clamp(2.7rem, 10.5vw, 3.4rem); line-height: 1.05; }
     .address-card { padding: 1.5rem 1.6rem; }
     .address-card address { font-size: 1.4rem; }
     .hours-list li { font-size: 0.9rem; padding: 0.55rem 0; }
@@ -1350,7 +1374,7 @@
   .story blockquote p em {
     font-style: italic;
     color: var(--beetle);
-    font-weight: 300;
+    font-weight: 500;
   }
 
   .story blockquote cite {
@@ -1771,6 +1795,7 @@
           src="https://www.openstreetmap.org/export/embed.html?bbox=-1.1500%2C52.7250%2C-1.1340%2C52.7340&amp;layer=mapnik&amp;marker=52.7295%2C-1.1420"
           loading="lazy"
           title="Map showing 9 Market Place, Mountsorrel"></iframe>
+        <a class="map-link" href="https://www.openstreetmap.org/?mlat=52.7295&amp;mlon=-1.1420#map=17/52.7295/-1.1420" target="_blank" rel="noopener">View larger map →</a>
       </div>
     </div>
   </div>
