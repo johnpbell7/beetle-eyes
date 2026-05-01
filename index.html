@@ -19,6 +19,12 @@
 <meta name="twitter:image" content="https://beetleeyesclothing.co.uk/img/shopfront.jpg" />
 <link rel="canonical" href="https://beetleeyesclothing.co.uk/" />
 
+<script>
+  // Always start at the top on reload/back-forward so the curtain plays in context
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  window.addEventListener('pageshow', function () { window.scrollTo(0, 0); });
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
