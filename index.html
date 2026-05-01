@@ -211,9 +211,24 @@
     height: 100%;
     display: block;
     color: var(--rose-2);
-    opacity: 0.55;
+    opacity: 0.5;
     transform-origin: center top;
     animation: fabric-sway-left 2.8s ease-in-out infinite;
+  }
+  /* Thinner strokes — reads more like fabric, less like a sketch on desktop */
+  .page-curtain .curtain-svg line {
+    stroke-width: 0.6;
+  }
+  .page-curtain .curtain-svg circle {
+    r: 3;
+    stroke-width: 0.5;
+  }
+  .page-curtain .curtain-svg path {
+    stroke-width: 0.32;
+  }
+  .page-curtain .curtain-svg path:last-of-type {
+    /* the scalloped hem at the bottom */
+    stroke-width: 0.5;
   }
   .page-curtain .curtain-right .curtain-svg {
     animation: fabric-sway-right 3.1s ease-in-out infinite;
