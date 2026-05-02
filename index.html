@@ -822,6 +822,14 @@
     transform: rotate(4deg);
     z-index: 3;
   }
+  .frame.f3 {
+    width: 30%;
+    aspect-ratio: 3/4;
+    bottom: 0;
+    left: -3%;
+    transform: rotate(-7deg);
+    z-index: 1;
+  }
   .frame:hover { transform: rotate(0) scale(1.02); z-index: 5; }
 
   /* Address stamp — dusty rose square in top-right corner */
@@ -894,17 +902,23 @@
 
     /* Mobile photo collage - simpler, bigger */
     .frame.f1 {
-      width: 76%;
+      width: 72%;
       top: 0;
-      left: 0;
+      left: 6%;
       transform: rotate(-2deg);
     }
     .frame.f2 {
-      width: 56%;
+      width: 54%;
       top: auto;
-      bottom: 5%;
+      bottom: 4%;
       right: -2%;
       transform: rotate(3deg);
+    }
+    .frame.f3 {
+      width: 36%;
+      bottom: 6%;
+      left: -3%;
+      transform: rotate(-6deg);
     }
 
     .address-stamp {
@@ -1557,6 +1571,23 @@
     font-style: normal;
   }
 
+  .magpie-link {
+    display: inline-block;
+    margin-top: 1.6rem;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--rose-2);
+    border-bottom: 1px solid var(--rose-soft);
+    padding-bottom: 1px;
+    transition: color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+  }
+  .magpie-link:hover {
+    color: var(--maroon);
+    border-color: var(--maroon);
+    transform: translateX(3px);
+  }
+
   @media (max-width: 800px) {
     .magpie { padding: 4.5rem 1.25rem; }
     .magpie-grid { grid-template-columns: 1fr; gap: 2.5rem; }
@@ -1601,7 +1632,8 @@
   }
 
   @media (max-width: 480px) {
-    .magpie-list { grid-template-columns: 1fr; }
+    .magpie-list { grid-template-columns: 1fr 1fr; gap: 0.4rem 0.7rem; }
+    .magpie-list li { font-size: 0.86rem; padding-left: 0.85rem; }
   }
 
   /* ---------- Visit ---------- */
@@ -1714,6 +1746,43 @@
     background: var(--rose);
     color: var(--paper);
     transform: translateY(-1px);
+  }
+
+  /* Visit section — hand-painted door times polaroid */
+  .door-polaroid {
+    max-width: 260px;
+    background: var(--paper);
+    border: 6px solid var(--paper);
+    padding-bottom: 0.9rem;
+    box-shadow: var(--shadow-warm);
+    margin: 2.2rem 0 0;
+  }
+  .door-polaroid img {
+    width: 100%;
+    display: block;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+  }
+  .door-polaroid figcaption {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 0.9rem;
+    color: var(--ink-3);
+    margin: 0.7rem 0.6rem 0;
+    text-align: center;
+    line-height: 1.4;
+  }
+  /* Reveal-aware tilt — composes translateY with rotation so entrance animates */
+  .door-polaroid.reveal {
+    transform: translateY(28px) rotate(-2.5deg);
+    transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.9s ease;
+  }
+  .door-polaroid.reveal.in {
+    transform: translateY(0) rotate(-2.5deg);
+  }
+  .door-polaroid.reveal.in:hover {
+    transform: translateY(0) rotate(0);
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .map-frame::after {
@@ -2229,6 +2298,7 @@
   </div>
 
   <div class="hero-visual" aria-hidden="true">
+    <div class="frame f3"><img src="img/be-sign.jpg" alt="Hand-painted Beetle Eyes Clothing wooden sign reading 'New, vintage and pre-loved clothes'" /></div>
     <div class="frame f1"><img src="img/be-rail-desk.jpg" alt="Beetle Eyes — two clothing rails flanking a central desk with bags, scarves and red ankle boots" /></div>
     <div class="frame f2"><img src="img/rail.jpg" alt="Beetle Eyes clothing rail with knitwear and walking boots" /></div>
     <div class="address-stamp">
@@ -2399,12 +2469,15 @@
 
       <ul class="magpie-list reveal delay-3">
         <li>Vintage &amp; pre-loved</li>
+        <li>Old furniture, kept</li>
         <li>Gifts &amp; cards</li>
         <li>Artwork &amp; prints</li>
         <li>Flowers &amp; plants</li>
         <li>Local makers</li>
         <li>One-off finds</li>
       </ul>
+
+      <a class="magpie-link reveal delay-3" href="https://www.curiousmagpie.co.uk/" target="_blank" rel="noopener">Visit Curious Magpie online <span aria-hidden="true">→</span></a>
     </div>
   </div>
 </section>
@@ -2488,6 +2561,11 @@
         <p style="margin-top: 1.5rem; font-style: italic; font-family: 'Fraunces', serif; color: var(--ink-3); font-size: 0.95rem;" class="reveal delay-2">
           Hours can flex — best to check Instagram before a longer journey.
         </p>
+
+        <figure class="door-polaroid reveal delay-3">
+          <img src="img/door-times.jpg" alt="Hand-painted opening times on the Curious Magpie front door" />
+          <figcaption>Hand-painted on the door, just so you know.</figcaption>
+        </figure>
       </div>
 
       <div class="map-frame reveal delay-1">
@@ -2728,7 +2806,7 @@
       const y = (e.clientY - rect.top) / rect.height - 0.5;
       frames.forEach((f, i) => {
         const depth = (i + 1) * 6;
-        const baseRot = f.classList.contains('f1') ? -3 : f.classList.contains('f2') ? 4 : -6;
+        const baseRot = f.classList.contains('f1') ? -3 : f.classList.contains('f2') ? 4 : f.classList.contains('f3') ? -7 : -6;
         const tiltX = -y * 8; // tilt up/down based on cursor Y
         const tiltY = x * 8;  // tilt left/right based on cursor X
         f.style.transform = `translate(${x * depth}px, ${y * depth}px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) rotate(${baseRot}deg)`;
