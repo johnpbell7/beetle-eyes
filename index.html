@@ -732,7 +732,7 @@
 
   /* Hero h1 isn't a reveal element — animate its underline against the heroIn timing */
   .hero-text h1 .underline::after {
-    animation: underline-draw 0.75s cubic-bezier(0.65, 0, 0.35, 1) 2.6s forwards;
+    animation: underline-draw 0.6s cubic-bezier(0.65, 0, 0.35, 1) 2.3s forwards;
   }
 
   @keyframes underline-draw {
@@ -828,7 +828,7 @@
     bottom: 0;
     left: -3%;
     transform: rotate(-7deg);
-    z-index: 1;
+    z-index: 4;
   }
   .frame:hover { transform: rotate(0) scale(1.02); z-index: 5; }
 
@@ -875,9 +875,9 @@
       gap: 2rem;
     }
     .hero-visual {
-      height: 65vh;
-      min-height: 440px;
-      max-height: 600px;
+      height: 55vh;
+      min-height: 380px;
+      max-height: 520px;
       order: 2;
     }
     .hero-text { order: 1; }
@@ -902,22 +902,22 @@
 
     /* Mobile photo collage - simpler, bigger */
     .frame.f1 {
-      width: 72%;
+      width: 70%;
       top: 0;
-      left: 6%;
+      left: 8%;
       transform: rotate(-2deg);
     }
     .frame.f2 {
-      width: 54%;
+      width: 50%;
       top: auto;
-      bottom: 4%;
-      right: -2%;
+      bottom: 10%;
+      right: 2%;
       transform: rotate(3deg);
     }
     .frame.f3 {
-      width: 36%;
-      bottom: 6%;
-      left: -3%;
+      width: 38%;
+      bottom: 14%;
+      left: 2%;
       transform: rotate(-6deg);
       z-index: 4;
     }
