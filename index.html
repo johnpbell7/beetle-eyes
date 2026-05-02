@@ -1784,6 +1784,9 @@
     transform: translateY(0) rotate(0);
     transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
   }
+  @media (max-width: 768px) {
+    .door-polaroid { display: none; }
+  }
 
   .map-frame::after {
     content: '';
