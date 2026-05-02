@@ -1376,12 +1376,13 @@
     }
   }
 
-  /* Asymmetric layout */
+  /* Asymmetric layout — 6 photos, 3 rows of alternating wide/narrow */
   .gallery-grid figure:nth-child(1) { grid-column: span 7; grid-row: span 4; }
-  .gallery-grid figure:nth-child(2) { grid-column: span 5; grid-row: span 3; }
-  .gallery-grid figure:nth-child(3) { grid-column: span 5; grid-row: span 3; }
-  .gallery-grid figure:nth-child(4) { grid-column: span 4; grid-row: span 4; }
-  .gallery-grid figure:nth-child(5) { grid-column: span 8; grid-row: span 4; }
+  .gallery-grid figure:nth-child(2) { grid-column: span 5; grid-row: span 4; }
+  .gallery-grid figure:nth-child(3) { grid-column: span 5; grid-row: span 4; }
+  .gallery-grid figure:nth-child(4) { grid-column: span 7; grid-row: span 4; }
+  .gallery-grid figure:nth-child(5) { grid-column: span 4; grid-row: span 3; }
+  .gallery-grid figure:nth-child(6) { grid-column: span 8; grid-row: span 3; }
 
   @media (max-width: 800px) {
     .gallery { padding: 4.5rem 1.25rem; }
@@ -1392,7 +1393,7 @@
     }
     .gallery-grid figure:nth-child(n) { grid-column: span 1; grid-row: span 2; }
     .gallery-grid figure:nth-child(1) { grid-column: span 2; grid-row: span 3; }
-    .gallery-grid figure:nth-child(5) { grid-column: span 2; grid-row: span 2; }
+    .gallery-grid figure:nth-child(6) { grid-column: span 2; grid-row: span 2; }
     .gallery-grid figcaption {
       opacity: 1;
       transform: translateY(0);
@@ -1431,14 +1432,17 @@
   }
 
   .magpie-visual .magpie-front,
+  .magpie-visual .magpie-mid,
   .magpie-visual .magpie-int {
     position: absolute;
     overflow: hidden;
     box-shadow: var(--shadow-warm);
     background: var(--paper-3);
     transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    border: 6px solid var(--paper);
   }
   .magpie-visual .magpie-front img,
+  .magpie-visual .magpie-mid img,
   .magpie-visual .magpie-int img {
     width: 100%; height: 100%;
     object-fit: cover;
@@ -1446,25 +1450,32 @@
   }
 
   .magpie-visual .magpie-front {
-    width: 78%;
-    aspect-ratio: 4/3.7;
+    width: 64%;
+    aspect-ratio: 4/3.6;
     top: 0;
-    right: 0;
-    transform: rotate(2deg);
+    left: 0;
+    transform: rotate(-2deg);
     z-index: 2;
-    border: 6px solid var(--paper);
+  }
+  .magpie-visual .magpie-mid {
+    width: 50%;
+    aspect-ratio: 3/4;
+    top: 22%;
+    right: 0;
+    transform: rotate(3deg);
+    z-index: 3;
   }
   .magpie-visual .magpie-int {
-    width: 56%;
+    width: 50%;
     aspect-ratio: 4/5;
     bottom: 0;
-    left: 0;
-    transform: rotate(-4deg);
-    z-index: 3;
-    border: 6px solid var(--paper);
+    left: 14%;
+    transform: rotate(-3deg);
+    z-index: 4;
   }
 
   .magpie-visual:hover .magpie-front { transform: rotate(0); }
+  .magpie-visual:hover .magpie-mid { transform: rotate(0); }
   .magpie-visual:hover .magpie-int { transform: rotate(0); }
 
   .magpie-tag {
@@ -1556,11 +1567,21 @@
       margin: 0 auto;
     }
     .magpie-visual .magpie-front {
-      width: 80%;
-      transform: rotate(2deg);
+      width: 72%;
+      top: 0;
+      left: 0;
+      transform: rotate(-2deg);
+    }
+    .magpie-visual .magpie-mid {
+      width: 54%;
+      top: 26%;
+      right: 0;
+      transform: rotate(3deg);
     }
     .magpie-visual .magpie-int {
-      width: 55%;
+      width: 50%;
+      bottom: 0;
+      left: 16%;
       transform: rotate(-3deg);
     }
     .magpie-tag {
@@ -2324,24 +2345,28 @@
 
     <div class="gallery-grid">
       <figure class="reveal">
-        <img src="img/window-display.jpg" alt="Shop window with orange dress, red cowboy boots, vintage ceramics and origami cranes" />
-        <figcaption>The window — origami cranes &amp; cowboy boots</figcaption>
+        <img src="img/be-rail-desk.jpg" alt="Two clothing rails flanking a central desk with bags, scarves and a pair of red ankle boots" />
+        <figcaption>Where things land</figcaption>
       </figure>
       <figure class="reveal delay-1">
-        <img src="img/interior-1.jpg" alt="Inside the shop — terracotta walls, tulips, candles and eclectic ceramics" />
-        <figcaption>Tulips &amp; talking ceramics</figcaption>
+        <img src="img/be-coats.jpg" alt="A customer browsing the rail of leather and sheepskin coats" />
+        <figcaption>Coats worth wearing again</figcaption>
       </figure>
       <figure class="reveal delay-2">
-        <img src="img/interior-2.jpg" alt="Plants, zines and prints on a wooden table" />
-        <figcaption>Plants, zines &amp; prints</figcaption>
+        <img src="img/be-prints.jpg" alt="Close-up of the rail — tiger print, blue, florals and a red eyelet blouse" />
+        <figcaption>Prints, properly chosen</figcaption>
       </figure>
       <figure class="reveal">
-        <img src="img/rail.jpg" alt="Beetle Eyes clothing rails with knitwear and walking boots" />
-        <figcaption>Rails worth a rummage</figcaption>
+        <img src="img/be-cream.jpg" alt="Cream and ivory dresses on the rail with a fringed black leather bag" />
+        <figcaption>Whites &amp; creams</figcaption>
       </figure>
       <figure class="reveal delay-1">
-        <img src="img/shopfront.jpg" alt="The mustard-yellow shopfront at 9 Market Place" />
-        <figcaption>The mustard-yellow door at No. 9</figcaption>
+        <img src="img/be-shoes.jpg" alt="Wire baskets holding green sandals, denim hanging below, and an open window onto the garden" />
+        <figcaption>Sandals, baskets &amp; daylight</figcaption>
+      </figure>
+      <figure class="reveal delay-2">
+        <img src="img/be-basquiat.jpg" alt="A Basquiat hoodie hung on the wall, with knits, leather jackets and oddities on the rails behind" />
+        <figcaption>Knits, leathers &amp; oddities</figcaption>
       </figure>
     </div>
   </div>
@@ -2351,6 +2376,7 @@
   <div class="magpie-grid">
     <div class="magpie-visual reveal" aria-hidden="true">
       <div class="magpie-front"><img src="img/shopfront.jpg" alt="The Curious Magpie shopfront — mustard yellow facade at 9 Market Place" /></div>
+      <div class="magpie-mid"><img src="img/window-display.jpg" alt="Curious Magpie window display — orange dress, red cowboy boots, vintage ceramics and origami cranes" /></div>
       <div class="magpie-int"><img src="img/interior-2.jpg" alt="Inside Curious Magpie — candles, ceramics, tulips" /></div>
       <div class="magpie-tag">
         <strong>The shop</strong>
