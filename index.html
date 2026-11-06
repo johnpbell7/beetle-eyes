@@ -543,6 +543,21 @@
   src: url(fonts/inter-tight-latin.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
+
+  /* JB Design Agency designer credit (studio banner, same on every client site) */
+  .jb-credit { background: #18181a; color: #fafaf8; font-family: Helvetica, Arial, sans-serif; font-size: 13.5px; line-height: 1.35; }
+  .jb-credit__in { max-width: 72rem; margin: 0 auto; padding: 14px 16px; display: flex; flex-direction: column; align-items: center; justify-content: space-between; gap: 10px; text-align: center; }
+  .jb-credit__by { display: inline-flex; align-items: center; gap: 10px; color: #a3a3a0; text-decoration: none; border-radius: 4px; }
+  .jb-credit__by b { font-weight: 600; color: #fafaf8; }
+  .jb-credit__by:hover b { text-decoration: underline; text-underline-offset: 3px; }
+  .jb-credit__mark { width: 24px; height: 24px; flex: none; }
+  .jb-credit__cta { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px 14px; font-weight: 500; }
+  .jb-credit__btn { display: inline-flex; align-items: center; gap: 6px; min-height: 36px; padding: 0 16px; border-radius: 999px; background: #fff04d; color: #18181a; font-weight: 600; white-space: nowrap; text-decoration: none; transition: transform .15s, box-shadow .15s; }
+  .jb-credit__btn svg { width: 14px; height: 14px; }
+  .jb-credit__btn:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgb(255 240 77 / .25); }
+  .jb-credit a:focus-visible { outline: 2px solid #fff04d; outline-offset: 3px; }
+  @media (min-width: 768px) { .jb-credit__in { flex-direction: row; text-align: left; gap: 24px; padding: 12px 32px; } }
+  @media (prefers-reduced-motion: reduce) { .jb-credit__btn { transition: none; } }
 </style>
 
 <style>
@@ -3124,10 +3139,19 @@
   </div>
 
   <div class="footer-bar">
-    <span>© <span id="year"></span> Beetle Eyes Clothing · Mountsorrel · Website by <a href="https://jbdesignagency.co.uk/" target="_blank" rel="noopener">JB Design Agency</a></span>
+    <span>© <span id="year"></span> Beetle Eyes Clothing · Mountsorrel</span>
     <span style="font-family: 'Fraunces', serif; font-style: italic;">Made with care for things worth keeping.</span>
   </div>
 </footer>
+
+<!-- Designer credit: the same slim JB Design Agency banner as the studio's other client sites -->
+<div class="jb-credit">
+  <div class="jb-credit__in">
+    <a class="jb-credit__by" href="https://jbdesignagency.co.uk/" target="_blank" rel="noopener"><svg class="jb-credit__mark" viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="jbcT" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff58a"/><stop offset="1" stop-color="#ffe94a"/></linearGradient><linearGradient id="jbcS" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f5c400"/><stop offset="1" stop-color="#e2a400"/></linearGradient></defs><rect x="1.5" y="1.5" width="45" height="45" rx="10.5" fill="url(#jbcS)" stroke="#18181a" stroke-width="1.6"/><rect x="5" y="3.6" width="38" height="36.4" rx="8" fill="url(#jbcT)" stroke="#e9b400" stroke-width="0.8"/><path d="M37.9 29.29Q37.9 32.2 35.87 33.9Q33.83 35.61 30.2 35.61H17.4Q13.73 35.61 11.52 33.64Q9.3 31.67 9.3 27.84H14.92Q14.92 29.29 15.52 30.03Q16.11 30.78 17.24 30.78Q18.26 30.78 18.82 30.12Q19.38 29.46 19.38 28.2V12.39H29.83Q33.37 12.39 35.37 14.01Q37.37 15.63 37.37 18.41Q37.37 20.46 36.3 21.82Q35.22 23.17 33.44 23.7Q35.45 24.13 36.68 25.7Q37.9 27.27 37.9 29.29ZM25.04 21.78H28.74Q30.13 21.78 30.87 21.17Q31.62 20.56 31.62 19.37Q31.62 18.18 30.87 17.55Q30.13 16.92 28.74 16.92H25.04ZM32.18 28.53Q32.18 27.31 31.37 26.61Q30.56 25.92 29.14 25.92H25.04V31.04H29.2Q30.63 31.04 31.4 30.4Q32.18 29.75 32.18 28.53Z" fill="#18181a" transform="translate(24 21.8) scale(0.92) translate(-23.6 -24)"/></svg><span>Designed &amp; built by <b>JB Design Agency</b></span></a>
+    <div class="jb-credit__cta"><span>Like this site? Let’s build yours.</span><a class="jb-credit__btn" href="mailto:jb.designagency89@gmail.com?subject=New%20website%20enquiry%20%28via%20Beetle%20Eyes%20Clothing%29&amp;body=Hi%20John%2C%0D%0A%0D%0AI%20saw%20the%20Beetle%20Eyes%20Clothing%20site%20and%20I%27d%20like%20to%20talk%20about%20a%20website%20for%20my%20business.%0D%0A%0D%0A">Start a project<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+  </div>
+</div>
+
 
 <script>
   // Page-load curtain — remove from DOM once the open animation finishes
@@ -3155,8 +3179,12 @@
   (function () {
     const btn = document.getElementById('floatIg');
     if (!btn) return;
+    // Steps aside once the footer is on screen: it has the Instagram links,
+    // and the button would otherwise sit over the footer's last line.
+    const footer = document.querySelector('footer');
     const onScroll = () => {
-      if (window.scrollY > 280) btn.classList.add('visible');
+      const footerShown = footer && footer.getBoundingClientRect().top < window.innerHeight;
+      if (window.scrollY > 280 && !footerShown) btn.classList.add('visible');
       else btn.classList.remove('visible');
     };
     window.addEventListener('scroll', onScroll, { passive: true });
